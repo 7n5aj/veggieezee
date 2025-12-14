@@ -78,7 +78,7 @@ def signup(request):
             # )
             
             # Success message
-            messages.success(request, "Your account has been successfully created! Welcome to VegePrediction.")
+            messages.success(request, "Your account has been successfully created! Welcome to Veggieezee.")
             
             # Optional: Auto-login after signup
             # login(request, my_user)
@@ -110,68 +110,62 @@ class UserProfile(models.Model):
     def __str__(self):
         return f"{self.user.username}'s Profile"
 """
+from django.http import HttpResponse
+
 def loginpage(request): 
-    """
-    Handle user login for VegePrediction platform
-    """
-    # Redirect if already logged in
-    if request.user.is_authenticated:
-        return redirect('home')  # or 'dashboard'
-    
     if request.method == "POST":
-        # Get form data (frontend uses email, not username)
         email = request.POST.get('email')
         password = request.POST.get('password')
-        remember = request.POST.get('remember')  # Optional: remember me functionality
         
-        # Validation
-        if not email or not password:
-            messages.error(request, "Please provide both email and password.")
-            return render(request, 'website/login.html')
-        
-        # Find user by email (since frontend uses email)
-        try:
-            user_obj = User.objects.get(email=email)
-            username = user_obj.username
-        except User.DoesNotExist:
-            messages.error(request, "No account found with this email address.")
-            return render(request, 'website/login.html')
+        # Find user by email
+        user = User.objects.filter(email=email).first()
+        if user is None:
+            return HttpResponse("No account found with this email address.")
         
         # Authenticate user
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, email=email, password=password)
         
         if user is not None:
-            # Login successful
+            # Login the user
             login(request, user)
             
-            # Store user info in session
-            request.session['username'] = username
+            # Store session data
             request.session['email'] = email
-            request.session['user_id'] = user.id
             
-            # Handle "Remember Me" functionality
-            if not remember:
-                # Session expires when browser closes
-                request.session.set_expiry(0)
-            else:
-                # Session lasts for 2 weeks (1209600 seconds)
-                request.session.set_expiry(1209600)
-            
-            # Success message
-            messages.success(request, f"Welcome back, {user.first_name or username}!")
-            
-            # Redirect to intended page or home
-            next_url = request.GET.get('next', 'home')  # or 'dashboard'
-            return redirect(next_url)
+            # Redirect to homepage or dashboard
+            return redirect('home') 
         else:
-            # Authentication failed
-            messages.error(request, "Incorrect password. Please try again.")
-            return render(request, 'website/login.html')
+            return HttpResponse("Incorrect password.")
     
-    # GET request - render login page
     return render(request, 'website/login.html')
-
-
+# def loginpage(request): 
+#     if request.method == "POST":
+#         email = request.POST.get('email')
+#         password = request.POST.get('password')
+        
+#         # Find user by email
+#         user = User.objects.filter(email=email).first()
+#         if user is None:
+#             messages.error(request, "No account found with this email address.")
+#             return redirect('login')
+        
+#         # Authenticate user
+#         user = authenticate(request, email=email, password=password)
+        
+#         if user is not None:
+#             # Login the user
+#             login(request, user)
+            
+#             # Store session data
+#             request.session['email'] = user.email
+            
+#             # Redirect to homepage or dashboard
+#             return redirect('home') 
+#         else:
+#             messages.error(request, "Incorrect password.")
+#             return redirect('login')
+    
+#     return render(request, 'website/login.html')
 def LogoutPage(request):
     """
     Handle user logout

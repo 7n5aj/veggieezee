@@ -380,8 +380,10 @@
             </div>
         </div>
         <nav class="nav-buttons">
-            <button class="nav-btn">📊 Dashboard</button>
-            <button class="nav-btn">📈 Insights</button>
+            <a href="{% url 'trade' %}" style="text-decoration: none;">
+            <button class="nav-btn">📊 Dashboard</button> </a>
+            <a href="{% url 'insights' %}" style="text-decoration: none;">
+            <button class="nav-btn">📈 Insights</button> </a>   
         </nav>
         <div class="user-controls">
             <button class="icon-btn"☀️</button>

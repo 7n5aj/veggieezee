@@ -1,9 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Vegetable Price Prediction</title>
+
     <style>
         * {
             margin: 0;
@@ -39,7 +41,6 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            min-height: 500px;
         }
 
         .login-features h2 {
@@ -64,7 +65,6 @@
             align-items: center;
             justify-content: center;
             font-size: 20px;
-            flex-shrink: 0;
         }
 
         .feature-text h3 {
@@ -76,7 +76,6 @@
         .feature-text p {
             font-size: 14px;
             opacity: 0.9;
-            line-height: 1.4;
         }
 
         .login-form-section {
@@ -91,7 +90,6 @@
             font-size: 32px;
             color: #1b5e20;
             margin-bottom: 10px;
-            font-weight: 700;
         }
 
         .login-form-section p {
@@ -107,9 +105,8 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            color: #333;
-            font-weight: 500;
             font-size: 14px;
+            color: #333;
         }
 
         .form-group input {
@@ -118,8 +115,6 @@
             border: 2px solid #e0e0e0;
             border-radius: 8px;
             font-size: 14px;
-            transition: all 0.3s ease;
-            font-family: inherit;
         }
 
         .form-group input:focus {
@@ -131,36 +126,13 @@
         .remember-forgot {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             margin-bottom: 25px;
             font-size: 14px;
-        }
-
-        .remember-forgot label {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            color: #555;
-            margin: 0;
-        }
-
-        .remember-forgot input[type="checkbox"] {
-            cursor: pointer;
-            width: 16px;
-            height: 16px;
-            accent-color: #43a047;
         }
 
         .remember-forgot a {
             color: #43a047;
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .remember-forgot a:hover {
-            color: #2e7d32;
         }
 
         .login-btn {
@@ -171,79 +143,44 @@
             border: none;
             border-radius: 8px;
             font-size: 16px;
-            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: inherit;
         }
 
         .login-btn:hover {
-            transform: translateY(-2px);
             box-shadow: 0 5px 20px rgba(46, 125, 50, 0.3);
-        }
-
-        .login-btn:active {
-            transform: translateY(0);
         }
 
         .signup-link {
             text-align: center;
             margin-top: 20px;
-            color: #757575;
             font-size: 14px;
         }
 
         .signup-link a {
             color: #43a047;
             text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .signup-link a:hover {
-            color: #2e7d32;
         }
 
         @media (max-width: 768px) {
             .login-container {
                 flex-direction: column;
             }
-
-            .login-features {
-                padding: 40px 30px;
-                min-height: auto;
-            }
-
-            .login-features h2 {
-                font-size: 24px;
-                margin-bottom: 25px;
-            }
-
-            .login-form-section {
-                padding: 40px 30px;
-            }
-
-            .login-form-section h1 {
-                font-size: 28px;
-            }
-
-            .feature-item {
-                margin-bottom: 20px;
-            }
         }
     </style>
 </head>
+
 <body>
     <div class="login-container">
-        <!-- Left Panel -->
+
+        <!-- LEFT SECTION -->
         <div class="login-features">
             <h2>Welcome Back!</h2>
-            
+
             <div class="feature-item">
                 <div class="feature-icon">📊</div>
                 <div class="feature-text">
                     <h3>Real-Time Data</h3>
-                    <p>Get accurate vegetable price predictions instantly</p>
+                    <p>Accurate vegetable price predictions</p>
                 </div>
             </div>
 
@@ -251,7 +188,7 @@
                 <div class="feature-icon">🌾</div>
                 <div class="feature-text">
                     <h3>Smart Analysis</h3>
-                    <p>AI-powered insights for better market decisions</p>
+                    <p>AI-powered market insights</p>
                 </div>
             </div>
 
@@ -259,66 +196,45 @@
                 <div class="feature-icon">📈</div>
                 <div class="feature-text">
                     <h3>Maximize Profits</h3>
-                    <p>Optimize your selling strategies with predictions</p>
+                    <p>Better selling decisions</p>
                 </div>
             </div>
         </div>
 
-        <!-- Right Panel -->
+        <!-- RIGHT SECTION -->
         <div class="login-form-section">
             <h1>Login</h1>
-            <p>Sign in to access your price predictions</p>
+            <p>Sign in to access your dashboard</p>
 
-            <form onsubmit="handleLogin(event)">
+            <form method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+
                 <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        placeholder="Enter your email" 
-                        required
-                    >
+                    <label>Email Address</label>
+                    <input type="email" name="email" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        placeholder="Enter your password" 
-                        required
-                    >
+                    <label>Password</label>
+                    <input type="password" name="password" required>
                 </div>
 
                 <div class="remember-forgot">
                     <label>
-                        <input type="checkbox" name="remember" id="remember">
+                        <input type="checkbox" name="remember">
                         Remember me
                     </label>
-                    <a href="#forgot-password">Forgot Password?</a>
+                    <a href="#">Forgot Password?</a>
                 </div>
 
                 <button type="submit" class="login-btn">Login</button>
 
                 <div class="signup-link">
-                    Don't have an account? <a href="signup.html">Sign up here</a>
+                    Don't have an account?
+                    <a href="{% url 'signup' %}">Sign up</a>
                 </div>
             </form>
         </div>
     </div>
-
-    <script>
-        function handleLogin(event) {
-            event.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const remember = document.getElementById('remember').checked;
-
-            console.log('Login attempt with:', { email, password, remember });
-            alert('Login successful! (Demo)');
-        }
-    </script>
 </body>
 </html>

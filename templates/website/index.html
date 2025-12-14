@@ -260,15 +260,16 @@
     <header>
         <nav>
             <div class="logo">
-               <b> 🥬 Veggieeze </b>
+               <b> 🥬 Veggieeze</b>
             </div>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#how-it-works">How It Works</a></li>
                 <li><a href="#pricing">Pricing</a></li>
+                <li><a href="{% url 'insights' %}" style="text-decoration: none;">test</a></li>
             </ul>
             <div class="auth-buttons">
-            <a href="{% url 'login' %}" style="text-decoration: none;">
+            <a href="{% url 'login' %}" style="text-decoration: none;"></a>
                 <button class="btn-login">Login</button> </a>   
             <a href="{% url 'signup' %}" style="text-decoration: none;">
                 <button class="btn-signup">Sign Up</button> </a> 
@@ -289,7 +290,7 @@
 
     <!-- Features Section -->
     <section class="features" id="features">
-        <h2>Why Choose VegPrice?</h2>
+        <h2>Why Choose Vegghieeze?</h2>
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">🎯</div>

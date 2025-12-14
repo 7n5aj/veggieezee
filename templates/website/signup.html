@@ -252,97 +252,88 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Content Section -->
-        <div class="content-section">
-            <div class="logo">
-                <div class="logo-icon">🥬</div>
-                <span>VegePrediction</span>
-            </div>
-            <h2>Predict Prices, Maximize Profits</h2>
-            <p>Get AI-powered predictions for vegetable market prices and make informed farming decisions.</p>
-            <ul class="feature-list">
-                <li>Real-time market price data</li>
-                <li>Accurate forecasts & trends</li>
-                <li>Seasonal insights</li>
-                <li>Personalized alerts</li>
-            </ul>
+<div class="container">
+
+    <!-- LEFT SECTION -->
+    <div class="content-section">
+        <div class="logo">
+            <div class="logo-icon">🥬</div>
+            <span>VegePrediction</span>
         </div>
-
-        <!-- Form Section -->
-        <div class="form-section">
-            <div class="form-header">
-                <h1>Create Account</h1>
-                <p>Join as a farmer optimizing your yields</p>
-            </div>
-
-            <form id="signupForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="firstName">First Name</label>
-                        <input type="text" id="firstName" name="firstName" placeholder="Ram" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" id="lastName" name="lastName" placeholder="Tamang" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" placeholder="mail@example.com" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" placeholder="+977-98XXXXXXXX" required>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="farmLocation">Farm Location</label>
-                        <input type="text" id="farmLocation" name="farmLocation" placeholder="City, State" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="cropType">Primary Crop</label>
-                        <select id="cropType" name="cropType" required>
-                            <option value="">Select a crop</option>
-                            <option value="tomato">Tomato</option>
-                            <option value="potato">Potato</option>
-                            <option value="onion">Onion</option>
-                            <option value="carrot">Carrot</option>
-                            <option value="cabbage">Cabbage</option>
-                            <option value="lettuce">Lettuce</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Min. 8 characters" required>
-                </div>
-
-                <div class="checkbox-group">
-                    <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms">I agree to the <a href="#" onclick="event.preventDefault()">Terms of Service</a> and <a href="#" onclick="event.preventDefault()">Privacy Policy</a></label>
-                </div>
-
-                <button type="submit" class="submit-btn">Sign Up</button>
-
-                <div class="login-link">
-                    Already have an account? <a href="#" onclick="event.preventDefault()">Log in</a>
-                </div>
-            </form>
-        </div>
+        <h2>Predict Prices, Maximize Profits</h2>
+        <p>AI-powered predictions for vegetable markets.</p>
     </div>
 
-    <script>
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Welcome to VegePrediction! Your account has been created successfully.');
-            this.reset();
-        });
-    </script>
-</body>
+    <!-- FORM SECTION -->
+    <div class="form-section">
+        <div class="form-header">
+            <h1>Create Account</h1>
+            <p>Join as a farmer optimizing your yields</p>
+        </div>
+
+        <!-- 🔥 FIXED FORM -->
+        <form method="POST" action="{% url 'signup' %}">
+            {% csrf_token %}
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" name="lastName" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" name="phone" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Farm Location</label>
+                    <input type="text" name="farmLocation" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Primary Crop</label>
+                    <select name="cropType" required>
+                        <option value="">Select</option>
+                        <option value="tomato">Tomato</option>
+                        <option value="potato">Potato</option>
+                        <option value="onion">Onion</option>
+                        <option value="carrot">Carrot</option>
+                        <option value="cabbage">Cabbage</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" minlength="8" required>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" name="terms" required>
+                <label>I agree to Terms & Privacy Policy</label>
+            </div>
+
+            <button type="submit" class="submit-btn">Sign Up</button>
+
+            <div class="login-link">
+                Already have an account?
+                <a href="{% url 'login' %}">Log in</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body></body>
 </html>
