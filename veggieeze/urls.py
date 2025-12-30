@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from veggieeze import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,19 @@ urlpatterns = [
     path('login/', views.loginpage, name='login'),
     path('trade/', views.trade, name='trade'),
     path('insights/', views.insights, name='insights'),
+    path('forgot-password/', auth_views.PasswordResetView.as_view(
+        template_name='./website/forgot_password.html'
+    ), name='password_reset'),
+
+    path('forgot-password/done/', auth_views.PasswordResetDoneView.as_view(
+        template_name='./website/password_reset_done.html'
+    ), name='password_reset_done'),
+
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(
+        template_name='./website/password_reset_confirm.html'
+    ), name='password_reset_confirm'),
+
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(
+        template_name='./website/password_reset_complete.html'
+    ), name='password_reset_complete'),
 ]
